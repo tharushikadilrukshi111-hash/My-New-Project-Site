@@ -62,6 +62,15 @@
 </div>
 </template>
 
+<script setup>
+const emit = defineEmits(['goShop'])
+
+const goShop = () => {
+  emit('goShop')
+}
+</script>
+
+
 <style scoped>
 
 .hero {

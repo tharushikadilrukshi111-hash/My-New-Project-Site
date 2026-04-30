@@ -16,8 +16,7 @@
 
           <div class="actions">
             <button @click="view(p)">View</button>
-            <button class="primary" @click="add(p)">Add to Cart</button>
-          </div>
+             <button @click="$emit('add', p)">Add</button></div>
         </div>
 
       </div>
@@ -87,5 +86,11 @@ const filtered = computed(() =>
   display: flex;
   gap: 10px;
   margin-top: 10px;
+}
+.primary {
+  background: #ff7a18;
+  color: white;
+  border:none;
+  padding:5px 10px;
 }
 </style>

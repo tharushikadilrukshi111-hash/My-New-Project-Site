@@ -22,75 +22,25 @@
   @add="add"
   @view="view"
 />
+<ProductDetails
+  v-if="selected"
+  :product="selected"
+  @close="selected = null"
+  @add="add"
+/>
+<Login
+  v-if="page==='login'"
+  @login-success="page='home'"
+  @go-signup="page='signup'"
+/>
+
+<Login v-if="page==='login'" />
+<Home v-if="page==='home'" />
+<Shop v-if="page==='shop'" />
+
+<ProductDetails v-if="selected" />
 
    <Home v-if="page==='home'" @goShop="page='shop'" />
-   
-
-  <!-- 🔥 PRODUCT DETAILS MODAL (UPGRADED) -->
-<div v-if="selected" class="modal">
-  <div class="modal-card">
-
-  <!-- ❌ CLOSE BUTTON -->
-    <button class="close-btn" @click="selected=null">✖</button>
-
-    <!-- LEFT IMAGE -->
-    <div class="modal-left">
-      <img :src="selected.thumbnail" />
-    </div>
-
-    <!-- RIGHT DETAILS -->
-    <div class="modal-right">
-      <h2>{{ selected.title }}</h2>
-
-      <p class="desc">{{ selected.description }}</p>
-
-      <div class="price">Rs. {{ selected.price }}</div>
-
-      <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
-
-      <!-- buttons -->
-      <div class="modal-actions">
-        <button class="btn btn-primary" @click="add(selected)">
-          🛒 Add to Cart
-        </button>
-
-        <button class="btn" @click="selected=null">
-          Close
-        </button>
-      </div>
-
-    </div>
-
-  </div>
-</div>
-
-    
-    <!-- LOGIN -->
-<div v-if="page==='login'" class="auth">
-  <div class="auth-wrapper">
-
-    <!-- LEFT SIDE -->
-    <div class="auth-left">
-      <h1>Welcome Back 👋</h1>
-      <p>Login to continue your learning journey</p>
-    </div>
-
-    <!-- RIGHT SIDE -->
-    <div class="auth-card">
-      <h2>Login</h2>
-
-      <input v-model="login.email" placeholder="Email"/>
-      <input v-model="login.password" type="password" placeholder="Password"/>
-
-      <button @click="handleLogin">Login</button>
-
-      <p class="link" @click="page='signup'">
-        Don't have an account? Sign up
-      </p>
-    </div>
-
-  </div>
-</div>
 
     <!-- SIGNUP -->
 <div v-if="page==='signup'" class="auth">
@@ -167,6 +117,8 @@ import NavBar from "./components/NavBar.vue"
 import Footer from "./components/Footer.vue"
 import Home from "./Views/Home.vue"
 import Shop from "./Views/Shop.vue"
+import ProductDetails from "./Views/ProductDetails.vue"
+import Login from "./Views/Login.vue"
 
 import { ref, computed, onMounted } from "vue"
 const heroImage = ref("https://images.unsplash.com/photo-1521335629791-ce4aec67dd53?q=80&w=1600&auto=format&fit=crop")
@@ -268,19 +220,6 @@ html, body {
   min-height: 100vh;
 }
 
-.actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.primary {
-  background: #ff7a18;
-  color: white;
-  border:none;
-  padding:5px 10px;
-}
-
 button {
   border-radius: 5000px;
 }
@@ -296,12 +235,6 @@ button {
 
 /* cart */
 .dark .cart {
-  background: #1e293b;
-  color: white;
-}
-
-/* auth boxes */
-.dark .auth-card {
   background: #1e293b;
   color: white;
 }
@@ -529,18 +462,7 @@ button {
   color: black;
 }
 
-.btn {
-  padding: 8px 20px;
-  border-radius: 9999px; /* oval shape */
-  border: none;
-  background: rgba(255,255,255,0.25);
-  color: white;
-  font-weight: 500;
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  transition: 0.3s;
-   font-size: 16px;
-}
+
 .small-btn {
   padding: 15px 2px;
   font-size:20px;
@@ -553,15 +475,7 @@ button {
 }
 
 /* primary button (important actions) */
-.btn-primary {
-  background: linear-gradient(135deg, #ff7a18, #ffb347);
-  color: white;
-  border-radius:10px;
-}
 
-.btn-primary:hover {
-  opacity: 0.9;
-}
 
 .dark .btn {
   background: rgba(0,0,0,0.4);
@@ -573,135 +487,10 @@ button {
   color: black;
 }
 
-/* 🔥 CATEGORIES */
-.categories {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
-  gap: 20px;
-  padding: 20px 40px;
-}
-
-.cat-card {
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  text-align: center;
-  padding: 15px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.cat-card:hover {
-  transform: translateY(-5px);
-}
-
-.cat-card img {
-  width: 100%;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 15px;
-}
-
-.cat-card h3 {
-  margin-top: 10px;
-  color: white;
-}
-
-/* 🔥 CATEGORY BAR */
-.category-bar {
-  display: flex;
-  gap: 20px;
-  padding: 20px 40px;
-  overflow-x: auto;
-}
-
-.category-item {
-  min-width: 120px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.category-item img {
-  width: 100%;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 15px;
-}
-
-.category-item span {
-  display: block;
-  margin-top: 5px;
-  color: white;
-}
-
-/* 🔥 SERVICES */
-.services {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 20px;
-  flex-wrap: wrap;
-}
-
-.services div {
-  background: rgba(255,255,255,0.15);
-  padding: 15px 25px;
-  border-radius: 30px;
-  color: white;
-}
-.section {
-  margin-top: 40px;
-} 
-
-/* 🔥 MODAL BACKGROUND */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-/* 🔥 MODAL CARD */
-.modal-card {
-  display: flex;
-  gap: 30px;
-  width: 800px;
-  max-width: 90%;
-  padding: 25px;
-  border-radius: 20px;
-  background: white;
-  animation: fadeIn 0.3s ease;
-  position:relative;
-}
-
 /* animation */
 @keyframes fadeIn {
   from { transform: scale(0.9); opacity: 0 }
   to { transform: scale(1); opacity: 1 }
-}
-
-/* LEFT IMAGE */
-.modal-left img {
-  width: 300px;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 15px;
-}
-
-/* RIGHT SIDE */
-.modal-right {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* title */
-.modal-right h2 {
-  margin-bottom: 10px;
 }
 
 /* description */
@@ -709,50 +498,6 @@ button {
   font-size: 14px;
   opacity: 0.8;
   margin-bottom: 15px;
-}
-
-/* price */
-.price {
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #ff7a18;
-}
-
-/* rating */
-.rating {
-  margin-bottom: 20px;
-  font-size: 14px;
-}
-
-/* buttons */
-.modal-actions {
-  display: flex;
-  gap: 10px;
-}
-
-/* DARK MODE */
-.dark .modal-card {
-  background: #1e293b;
-  color: white;
-}
-
-/* ❌ CLOSE BUTTON */
-.close-btn {
-  z-index:10;
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  border: none;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.6);
-  color: white;
-  font-size: 18px;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: 0.3s;
 }
 
 .remove-btn {
