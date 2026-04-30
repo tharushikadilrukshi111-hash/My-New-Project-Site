@@ -15,58 +15,36 @@
       @toggleDark="isDark = !isDark"
       @openCart="showCart = true"
     />
-   <Shop 
-  v-if="page==='shop'"
+   <Login 
+  v-if="page === 'login'" 
+  @login-success="page = 'home'"
+/>
+
+<Signup 
+  v-if="page === 'signup'" 
+  @go-login="page = 'login'"
+/>
+
+<Home 
+  v-if="page === 'home'" 
+  @goShop="page = 'shop'"
+/>
+
+<Shop 
+  v-if="page === 'shop'"
   :products="products"
   :search="search"
   @add="add"
   @view="view"
 />
-<ProductDetails
+
+<ProductDetails 
   v-if="selected"
   :product="selected"
   @close="selected = null"
   @add="add"
 />
-<Login
-  v-if="page==='login'"
-  @login-success="page='home'"
-  @go-signup="page='signup'"
-/>
 
-<Login v-if="page==='login'" />
-<Home v-if="page==='home'" />
-<Shop v-if="page==='shop'" />
-
-<ProductDetails v-if="selected" />
-
-   <Home v-if="page==='home'" @goShop="page='shop'" />
-
-    <!-- SIGNUP -->
-<div v-if="page==='signup'" class="auth">
-  <div class="auth-wrapper">
-
-    <div class="auth-left">
-      <h1>Create Account 🚀</h1>
-      <p>Join us and start learning today</p>
-    </div>
-
-    <div class="auth-card">
-      <h2>Sign Up</h2>
-
-      <input v-model="signup.name" placeholder="Name"/>
-      <input v-model="signup.email" placeholder="Email"/>
-      <input v-model="signup.password" type="password" placeholder="Password"/>
-
-      <button @click="handleSignup">Create Account</button>
-
-      <p class="link" @click="page='login'">
-        Already have an account? Login
-      </p>
-    </div>
-
-  </div>
-</div>
 
    <!-- CART -->
 <div v-if="showCart" class="cart-overlay">
@@ -119,6 +97,7 @@ import Home from "./Views/Home.vue"
 import Shop from "./Views/Shop.vue"
 import ProductDetails from "./Views/ProductDetails.vue"
 import Login from "./Views/Login.vue"
+import Signup from "./Views/SignUp.vue"
 
 import { ref, computed, onMounted } from "vue"
 const heroImage = ref("https://images.unsplash.com/photo-1521335629791-ce4aec67dd53?q=80&w=1600&auto=format&fit=crop")
@@ -127,7 +106,7 @@ const selected = ref<Product | null>(null)
 const cart = ref<Product[]>([])
 const showCart = ref(false)
 const isDark = ref(false)
-const page = ref("home")
+const page = ref("signup")
 const removeFromCart = (index) => {
   cart.value.splice(index, 1)
 }
@@ -241,96 +220,6 @@ button {
 
 /* input fields */
 .dark input {
-  background: #0f172a;
-  color: white;
-  border: 1px solid #334155;
-}
-
-/* 🌟 AUTH LAYOUT */
-.auth {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-/* container split */
-.auth-wrapper {
-  display: flex;
-  width: 800px;
-  height: 450px;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-  backdrop-filter: blur(10px);
-}
-
-/* LEFT SIDE */
-.auth-left {
-  flex: 1;
-  background: linear-gradient(135deg, #667eea, #6ccef5);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 40px;
-}
-
-.auth-left h1 {
-  font-size: 32px;
-}
-
-.auth-left p {
-  opacity: 0.9;
-}
-
-/* RIGHT SIDE FORM */
-.auth-card {
-  flex: 1;
-  background: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 40px;
-  gap: 12px;
-}
-
-.auth-card h2 {
-  margin-bottom: 10px;
-}
-
-/* INPUTS */
-.auth-card input {
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  outline: none;
-}
-
-/* BUTTON */
-.auth-card button {
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  background: #ff7a18;
-  color: white;
-  cursor: pointer;
-}
-
-/* LINK */
-.link {
-  color: #667eea;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-/* DARK MODE SUPPORT */
-.dark .auth-card {
-  background: #1e293b;
-  color: white;
-}
-
-.dark .auth-card input {
   background: #0f172a;
   color: white;
   border: 1px solid #334155;

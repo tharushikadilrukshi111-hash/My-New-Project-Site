@@ -25,9 +25,10 @@
 </div>
 </template>
 
+<script setup lang="ts">
 import { ref } from "vue"
 
-const emit = defineEmits(["login-success", "go-signup"])
+const emit = defineEmits(["login-success"])
 
 const email = ref("")
 const password = ref("")
@@ -40,7 +41,7 @@ const handleLogin = () => {
     alert("Fill all fields!")
   }
 }
-
+</script>
 <style scoped>
 .auth {
   display: flex;
