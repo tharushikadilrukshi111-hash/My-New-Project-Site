@@ -15,36 +15,16 @@
       @toggleDark="isDark = !isDark"
       @openCart="showCart = true"
     />
+   <Shop 
+  v-if="page==='shop'"
+  :products="products"
+  :search="search"
+  @add="add"
+  @view="view"
+/>
+
+   <Home v-if="page==='home'" @goShop="page='shop'" />
    
-   <Home v-if="page==='home'" />
-
-
-
-
-
-<!-- 🔥 SECTION TITLE -->
-<div v-if="page==='shop'" class="section-title">
-  <h2> 🛍️ All Products</h2>
-</div>
-
-    <!-- CARDS -->
-    <div v-if="page==='shop'" class="grid">
-      <div v-for="p in filtered" :key="p.id" class="card">
-
-        <img :src="p.thumbnail || 'https://picsum.photos/400/300'" @click="view(p)" style="cursor:pointer"/>
-
-        <div class="card-body">
-          <h3>{{ p.title }}</h3>
-          <p>Rs.{{ p.price }}</p>
-
-          <div class="actions">
-            <button @click="view(p)">View</button>
-            <button class="primary" @click="add(p)">Add to Cart</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
 
   <!-- 🔥 PRODUCT DETAILS MODAL (UPGRADED) -->
 <div v-if="selected" class="modal">
@@ -186,7 +166,7 @@
 import NavBar from "./components/NavBar.vue"
 import Footer from "./components/Footer.vue"
 import Home from "./Views/Home.vue"
-
+import Shop from "./Views/Shop.vue"
 
 import { ref, computed, onMounted } from "vue"
 const heroImage = ref("https://images.unsplash.com/photo-1521335629791-ce4aec67dd53?q=80&w=1600&auto=format&fit=crop")
@@ -218,12 +198,6 @@ onMounted(async () => {
   products.value = data.products
 })
 
-/* FILTER */
-const filtered = computed(() =>
-  products.value.filter(p =>
-    p.title.toLowerCase().includes(search.value.toLowerCase())
-  )
-)
 
 /* FUNCTIONS */
 const view = (p) => selected.value = p
@@ -294,37 +268,6 @@ html, body {
   min-height: 100vh;
 }
 
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-  gap: 20px;
-  padding: 40px;
-}
-
-.card {
-  backdrop-filter: blur(12px);
-  background: rgba(255,255,255,0.15);
-  border-radius: 20px;
-  overflow: hidden;
-  color: white;
-  transition: 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-10px) scale(1.03);
-}
-
-.card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.card-body {
-  padding: 15px;
-}
-
 .actions {
   display: flex;
   gap: 10px;
@@ -350,14 +293,6 @@ button {
     radial-gradient(circle at 50% 80%, #312e81 0%, transparent 45%),
     linear-gradient(135deg, #020617, #0f172a);
 }
-
-/* cards */
-.dark .card {
-  background: rgba(255, 255, 255, 0.05);
-  color: white;
-}
-
-
 
 /* cart */
 .dark .cart {
@@ -697,29 +632,6 @@ button {
   display: block;
   margin-top: 5px;
   color: white;
-}
-
-/* 🔥 TITLE */
-.section-title {
-  padding: 10px 40px;
-  color: white;
-}
-
-.section-title h2 {
-  font-size: 22px;
-}
-  
-
-
-/* 🔥 GLOBAL SECTION */
-
-
-/* titles */
-.section-title {
-  font-size: 28px;
-  margin-bottom: 30px;
-  color: white;
-  font-weight: 600;
 }
 
 /* 🔥 SERVICES */
