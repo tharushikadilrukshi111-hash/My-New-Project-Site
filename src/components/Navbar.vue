@@ -16,7 +16,7 @@
       <button class="btn" @click="$emit('changePage','login')">Login</button>
       <button class="btn" @click="$emit('changePage','signup')">Sign Up</button>
 
-      <button @click="$emit('toggleDark')">
+      <button class="btn"  @click="$emit('toggleDark')">
         {{ isDark ? "☀️" : "🌙" }}
       </button>
 
@@ -66,12 +66,13 @@ const updateSearch = (e: Event) => {
   font-size:20px;
 }
 .btn {
-  padding: 8px 20px;
+
   border-radius: 9999px;
   border: none;
   background: rgba(255,255,255,0.25);
   color: white;
   cursor: pointer;
+  padding: 10px 25px;
 }
 .btn-primary {
   background: linear-gradient(135deg, #ff7a18, #ffb347);
@@ -82,4 +83,10 @@ const updateSearch = (e: Event) => {
   background: rgba(0, 0, 0, 0.4);
   color: white;
 }
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 </style>

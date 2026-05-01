@@ -83,6 +83,10 @@ const goShop = () => {
 .hero h1 {
   font-size: 75px;
 }
+.small-btn {
+  padding: px 0;   
+  font-size: 30px;
+}
 
 .hero p{
   font-size: 25px;
@@ -182,8 +186,9 @@ const goShop = () => {
 .btn-primary {
   background: linear-gradient(135deg, #ff7a18, #ffb347);
   color: white;
-  border-radius:10px;
+  border-radius:30px;
 }
+
 
 .btn-primary:hover {
   opacity: 0.9;
