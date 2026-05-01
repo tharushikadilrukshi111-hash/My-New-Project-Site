@@ -35,7 +35,7 @@
 
     <!-- ACTIONS -->
     <button class="checkout">Checkout</button>
-<button @click="() => { console.log('clicked'); emit('close') }">
+<button class="GoBack" @click="() => { console.log('clicked'); emit('close') }">
   ⬅ Go Back
 </button>
   </div>  
@@ -66,6 +66,17 @@ const emit = defineEmits(["close", "remove"])
   padding: 20px;
   overflow-y: auto;
   animation: slideIn 0.3s ease;
+  
+}
+.cart-panel h2{
+     font-weight: 900; 
+  color: #111; 
+    font-size: 29px;
+}
+.cart-panel h4{
+     font-weight: 600; 
+  color: #111; 
+    font-size: 25px;
 }
 .dark .cart-panel {
   background: #1e293b;
@@ -80,6 +91,9 @@ const emit = defineEmits(["close", "remove"])
   display: flex;
   justify-content: space-between;
   padding: 8px 0;
+  font-weight: 600; 
+  color: #111; 
+    font-size: 15px;
   border-bottom: 1px solid #eee;
 }
 .remove-btn {
@@ -93,6 +107,9 @@ const emit = defineEmits(["close", "remove"])
 .cart-total {
   margin-top: 15px;
   font-size: 18px;
+   font-weight: 600; 
+  color: #111; 
+  
 }
 .pay-btn {
   width: 100%;
@@ -102,6 +119,10 @@ const emit = defineEmits(["close", "remove"])
   border-radius: 10px;
   background: #f1f1f1;
   cursor: pointer;
+     font-weight: 800; 
+  color: #111; 
+    font-size: 15px;
+
 }
 
 .pay-btn:hover {
@@ -132,5 +153,11 @@ const emit = defineEmits(["close", "remove"])
   color: white;
   border: none;
   border-radius: 10px;
+}
+.GoBack {
+ padding: 14px 20px;
+ font-size: 16px;
+ border-radius: 18px;
+
 }
 </style>
