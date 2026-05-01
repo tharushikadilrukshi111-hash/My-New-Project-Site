@@ -27,7 +27,7 @@
 <div class="promo-banner">
   <h2>🔥 Mega Sale</h2>
   <p>Up to 50% OFF on selected items</p>
-  <button class="btn btn-primary" @click="page='shop'">
+<button class="btn btn-primary" @click="$emit('goShop')">
     Shop Now
   </button>
 </div>
@@ -63,6 +63,7 @@
 </template>
 
 <script setup>
+import Button from "../components/Button.vue"
 const emit = defineEmits(['goShop'])
 
 const goShop = () => {

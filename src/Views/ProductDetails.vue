@@ -138,6 +138,11 @@ const emit = defineEmits(["close", "add"])
   transition: 0.3s;
    font-size: 16px;
 }
+.desc {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 15px;
+}
 </style>
 
 

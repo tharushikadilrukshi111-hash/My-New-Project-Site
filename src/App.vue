@@ -24,11 +24,13 @@
 <Signup 
   v-if="page === 'signup'" 
   @go-login="page = 'login'"
+  
 />
 
 <Home 
   v-if="page === 'home'" 
   @goShop="page = 'shop'"
+
 />
 
 <Shop 
@@ -184,11 +186,7 @@ button {
     linear-gradient(135deg, #020617, #0f172a);
 }
 
-/* cart */
-.dark .cart {
-  background: #1e293b;
-  color: white;
-}
+
 
 /* input fields */
 .dark input {
@@ -262,12 +260,6 @@ button {
   to { transform: scale(1); opacity: 1 }
 }
 
-/* description */
-.desc {
-  font-size: 14px;
-  opacity: 0.8;
-  margin-bottom: 15px;
-}
 
 
 
