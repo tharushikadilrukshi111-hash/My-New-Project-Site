@@ -15,8 +15,8 @@
           <p>Rs.{{ p.price }}</p>
 
           <div class="actions">
-            <button @click="$emit('view', p)">View</button>
-             <button @click="$emit('add', p)">Add</button></div>
+            <button  @click="$emit('view', p)">View</button>
+             <button class="primary" @click="$emit('add', p)">Add</button></div>
         </div>
 
       </div>

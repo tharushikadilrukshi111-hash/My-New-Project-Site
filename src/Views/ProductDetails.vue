@@ -20,15 +20,11 @@
 
       <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
 
-      <!-- buttons -->
       <div class="modal-actions">
-        <button class="btn btn-primary" @click="emit('add', product)">
+        <button class="AddtoCart"  @click="emit('add', product)">
           🛒 Add to Cart
         </button>
 
-        <button class="btn" @click="emit('close')">
-          Close
-        </button>
       </div>
 
     </div>
@@ -97,9 +93,13 @@ const emit = defineEmits(["close", "add"])
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-weight: 700; 
 }
 .modal-right h2 {
   margin-bottom: 10px;
+ font-weight: 900; 
+  color: #111; 
+    font-size: 29px;
 }
 .price {
   font-size: 22px;
@@ -113,7 +113,13 @@ const emit = defineEmits(["close", "add"])
 }
 .modal-actions {
   display: flex;
+font-size: 30px;
+  font-weight: 800;
+  color: #111; 
   gap: 10px;
+  justify-content: center;
+
+  
 }
 .btn-primary {
   background: linear-gradient(135deg, #ff7a18, #ffb347);
@@ -137,9 +143,12 @@ const emit = defineEmits(["close", "add"])
    font-size: 16px;
 }
 .desc {
-  font-size: 14px;
+  font-size: 16px;
   opacity: 0.8;
   margin-bottom: 15px;
+}
+.AddtoCart{
+    padding: 12px 24px;  
 }
 </style>
 
