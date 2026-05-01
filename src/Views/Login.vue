@@ -41,6 +41,11 @@ const handleLogin = () => {
     alert("Fill all fields!")
   }
 }
+
+const toggleTheme = () => {
+  document.body.classList.toggle("dark")
+  document.body.classList.toggle("light")
+}
 </script>
 <style scoped>
 .auth {
@@ -106,19 +111,38 @@ const handleLogin = () => {
   color: white;
   cursor: pointer;
 }
-.dark .auth-card {
+
+:deep(.dark) .auth-card {
   background: #1e293b;
   color: white;
 }
 
-.dark .auth-card input {
+:deep(.dark) .auth-card input {
   background: #0f172a;
   color: white;
   border: 1px solid #334155;
 }
+
+:deep(.light) .auth-card {
+  background: white;
+  color: #1e293b;
+}
+
+:deep(.light) .auth-card input {
+  background: #ffffff;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+}
 .link {
-  color: #667eea;
+  color: #667eea;   /* blue */
   cursor: pointer;
   font-size: 14px;
+  transition: color 0.2s ease;
 }
+
+.link:hover {
+  color: #4f46e5;   /* darker blue on hover */
+  text-decoration: underline;
+}
+
 </style>

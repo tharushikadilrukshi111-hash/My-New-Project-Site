@@ -41,6 +41,11 @@ const handleSignup = () => {
     alert("Fill all fields!")
   }
 }
+
+const toggleTheme = () => {
+  document.body.classList.toggle("dark")
+  document.body.classList.toggle("light")
+}
 </script>
 
 <style scoped>
@@ -118,8 +123,36 @@ const handleSignup = () => {
   border: 1px solid #334155;
 }
 .link {
-  color: #667eea;
+  color: #667eea;   /* blue */
   cursor: pointer;
   font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: #4f46e5;   /* darker blue on hover */
+  text-decoration: underline;
+}
+:deep(.dark) .auth-card {
+  background: #1e293b;
+  color: white;
+}
+
+:deep(.dark) .auth-card input {
+  background: #0f172a;
+  color: white;
+  border: 1px solid #334155;
+}
+
+/* LIGHT MODE */
+:deep(.light) .auth-card {
+  background: white;
+  color: #1e293b;
+}
+
+:deep(.light) .auth-card input {
+  background: #f1f5f9;
+  color: #1e293b;
+  border: 1px solid #cbd5e1;
 }
 </style>
