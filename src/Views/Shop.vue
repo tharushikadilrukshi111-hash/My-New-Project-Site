@@ -86,6 +86,7 @@ const filtered = computed(() =>
   display: flex;
   gap: 10px;
   margin-top: 10px;
+   
 }
 .primary {
   background: #ff7a18;

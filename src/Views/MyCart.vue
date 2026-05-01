@@ -16,7 +16,7 @@
   <span>{{ c.title }}</span>
   <span>Rs. {{ c.price }}</span>
 
-  <button class="remove-btn" @click="removeFromCart(index)">
+  <button class="remove-btn" @click="emit('remove', index)">
     ❌
   </button>
 
@@ -41,6 +41,7 @@
   </div>  
   </div>
   </template>
+
   <script setup>
 const props = defineProps({
   cart: Array,

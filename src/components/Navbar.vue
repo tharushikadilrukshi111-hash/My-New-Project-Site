@@ -73,11 +73,13 @@ const updateSearch = (e: Event) => {
   color: white;
   cursor: pointer;
   padding: 10px 25px;
+  
 }
 .btn-primary {
   background: linear-gradient(135deg, #ff7a18, #ffb347);
     color: white;
   border-radius:10px;
+  font-size:18px;
 }
 .dark .nav-glass {
   background: rgba(0, 0, 0, 0.4);
