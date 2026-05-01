@@ -16,7 +16,7 @@
       
       <button @click="handleLogin">Login</button>
 
-      <p class="link" @click="page='signup'">
+      <p class="link"  @click="$emit('go-signup')">
         Don't have an account? Sign up
       </p>
     </div>

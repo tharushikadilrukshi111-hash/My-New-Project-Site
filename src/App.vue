@@ -18,6 +18,7 @@
    <Login 
   v-if="page === 'login'" 
   @login-success="page = 'home'"
+   @go-signup="page = 'signup'"
 />
 
 <Signup 
@@ -44,47 +45,14 @@
   @close="selected = null"
   @add="add"
 />
+<Cart 
+  v-if="showCart"
+  :cart="cart"
+  :total="total"
+  @close="showCart = false"
+  @remove="removeFromCart"
+/>
 
-
-   <!-- CART -->
-<div v-if="showCart" class="cart-overlay">
-
-  <div class="cart-panel">
-
-    <h2>🛒 My Cart</h2>
-
-    <!-- ITEMS -->
-    <div v-if="cart.length === 0" class="empty">
-      Your cart is empty
-    </div>
-
-    <div v-for="(c, index) in cart" :key="index" class="cart-item">
-
-  <span>{{ c.title }}</span>
-  <span>Rs. {{ c.price }}</span>
-
-  <button class="remove-btn" @click="removeFromCart(index)">
-    ❌
-  </button>
-
-</div>
-    <!-- TOTAL -->
-    <div class="cart-total">
-      Total: <b>Rs. {{ total }}</b>
-    </div>
-
-    <!-- PAYMENT -->
-    <h4>Payment Methods</h4>
-
-    <button class="pay-btn">💳 Credit Card</button>
-    <button class="pay-btn">📱 Mobile Payment</button>
-    <button class="pay-btn">🏦 Bank Transfer</button>
-
-    <!-- ACTIONS -->
-    <button class="checkout">Checkout</button>
-    <button class="back-btn" @click="showCart=false">⬅ Go Back</button>
-   </div>
-  </div>
 <Footer/>
 </div>
 </template>
@@ -98,6 +66,7 @@ import Shop from "./Views/Shop.vue"
 import ProductDetails from "./Views/ProductDetails.vue"
 import Login from "./Views/Login.vue"
 import Signup from "./Views/SignUp.vue"
+import Cart from "./Views/MyCart.vue"
 
 import { ref, computed, onMounted } from "vue"
 const heroImage = ref("https://images.unsplash.com/photo-1521335629791-ce4aec67dd53?q=80&w=1600&auto=format&fit=crop")
@@ -106,10 +75,13 @@ const selected = ref<Product | null>(null)
 const cart = ref<Product[]>([])
 const showCart = ref(false)
 const isDark = ref(false)
-const page = ref("signup")
+const page = ref("home")
 const removeFromCart = (index) => {
   cart.value.splice(index, 1)
 }
+const isAuthPage = computed(() =>
+  page.value === "login" || page.value === "signup"
+)
 type Product = {
   id: number
   title: string
@@ -225,102 +197,10 @@ button {
   border: 1px solid #334155;
 }
 
-/* CART OVERLAY */
-.cart-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* CART PANEL */
-.cart-panel {
-  width: 450px;
-  height: 100%;
-  background: white;
-  padding: 20px;
-  overflow-y: auto;
-  animation: slideIn 0.3s ease;
-}
-
 /* animation */
 @keyframes slideIn {
   from { transform: translateX(100%); }
   to { transform: translateX(0); }
-}
-
-/* items */
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
-}
-
-/* total */
-.cart-total {
-  margin-top: 15px;
-  font-size: 18px;
-}
-
-/* payment buttons */
-.pay-btn {
-  width: 100%;
-  padding: 10px;
-  margin-top: 8px;
-  border: none;
-  border-radius: 10px;
-  background: #f1f1f1;
-  cursor: pointer;
-}
-
-.pay-btn:hover {
-  background: #ddd;
-}
-
-/* checkout */
-.checkout {
-  width: 100%;
-  margin-top: 15px;
-  padding: 12px;
-  background: green;
-  color: white;
-  border: none;
-  border-radius: 10px;
-}
-
-/* back button */
-.back-btn {
-  width: 100%;
-  margin-top: 10px;
-  padding: 12px;
-  background: #ff7a18;
-  color: white;
-  border: none;
-  border-radius: 10px;
-}
-
-/* empty cart */
-.empty {
-  text-align: center;
-  color: gray;
-  padding: 20px;
-}
-
-/* DARK MODE */
-.dark .cart-panel {
-  background: #1e293b;
-  color: white;
-}
-
-.dark .pay-btn {
-  background: #0f172a;
-  color: white;
-}
-
-.dark .pay-btn:hover {
-  background: #334155;
 }
 
 .home-btn {
@@ -389,13 +269,6 @@ button {
   margin-bottom: 15px;
 }
 
-.remove-btn {
-  background: red;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 10px;
-  cursor: pointer;
-}
+
 
 </style>
