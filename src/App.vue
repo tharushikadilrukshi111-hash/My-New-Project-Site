@@ -15,11 +15,12 @@
       @toggleDark="isDark = !isDark"
       @openCart="showCart = true"
     />
-   <Login 
+
+  <Login 
   v-if="page === 'login'" 
   @login-success="page = 'home'"
    @go-signup="page = 'signup'"
-/>
+   />
 
 <Signup 
   v-if="page === 'signup'" 
@@ -47,6 +48,7 @@
   @close="selected = null"
   @add="add"
 />
+
 <Cart 
   v-if="showCart"
   :cart="cart"
@@ -149,25 +151,22 @@ body {
     radial-gradient(circle at 50% 80%, #9333ea 0%, transparent 40%),
     linear-gradient(135deg, #0f172a, #111827);
   z-index: -1;
-
 }
 
-.logo {
-  font-size: 22px;
-  font-weight: bold;
-  cursor:pointer;
-}
 html, body {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+    box-sizing: border-box;
 }
+
 .app {
   width: 100vw;
   min-height: 100vh;
 }
+
 #app {
   width: 100vw;
   min-height: 100vh;
@@ -186,8 +185,6 @@ button {
     linear-gradient(135deg, #020617, #0f172a);
 }
 
-
-
 /* input fields */
 .dark input {
   background: #0f172a;
@@ -201,66 +198,11 @@ button {
   to { transform: translateX(0); }
 }
 
-.home-btn {
-  padding: 8px 20px;
-  border-radius: 9999px; /* makes oval */
-  border: none;
-  background: rgba(255,255,255,0.3);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  transition: 0.3s;
-}
-
-/* hover effect */
-.home-btn:hover {
-  background: white;
-  color: #667eea;
-}
-
-.dark .home-btn {
-  background: rgba(0,0,0,0.4);
-  color: white;
-}
-
-.dark .home-btn:hover {
-  background: white;
-  color: black;
-}
-
-
-.small-btn {
-  padding: 15px 2px;
-  font-size:20px;
-}
-
-/* hover */
-.btn:hover {
-  background: white;
-  color: #667eea;
-}
-
-/* primary button (important actions) */
-
-
-.dark .btn {
-  background: rgba(0,0,0,0.4);
-  color: white;
-}
-
-.dark .btn:hover {
-  background: white;
-  color: black;
-}
 
 /* animation */
 @keyframes fadeIn {
   from { transform: scale(0.9); opacity: 0 }
   to { transform: scale(1); opacity: 1 }
 }
-
-
-
 
 </style>

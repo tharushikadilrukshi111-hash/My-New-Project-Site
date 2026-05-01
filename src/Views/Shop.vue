@@ -8,14 +8,14 @@
     <div  class="grid">
       <div v-for="p in filtered" :key="p.id" class="card">
 
-        <img :src="p.thumbnail || 'https://picsum.photos/400/300'" @click="view(p)" style="cursor:pointer"/>
+        <img :src="p.thumbnail || 'https://picsum.photos/400/300'" @click="$emit('view', p)" style="cursor:pointer"/>
 
         <div class="card-body">
           <h3>{{ p.title }}</h3>
           <p>Rs.{{ p.price }}</p>
 
           <div class="actions">
-            <button @click="view(p)">View</button>
+            <button @click="$emit('view', p)">View</button>
              <button @click="$emit('add', p)">Add</button></div>
         </div>
 
@@ -33,7 +33,7 @@ const props = defineProps({
 
 const filtered = computed(() =>
   props.products.filter(p =>
-    p.title.toLowerCase().includes(props.search.toLowerCase())
+    p.title.toLowerCase().includes((props.search ||"").toLowerCase())
   )
 )
 </script>

@@ -3,30 +3,30 @@
   <div class="modal-card">
 
   <!-- ❌ CLOSE BUTTON -->
-    <button class="close-btn" @click="selected=null">✖</button>
+    <button class="close-btn" @click="emit('close')">✖</button>
 
     <!-- LEFT IMAGE -->
     <div class="modal-left">
-      <img :src="selected.thumbnail" />
+      <img :src="product.thumbnail" />
     </div>
 
     <!-- RIGHT DETAILS -->
     <div class="modal-right">
-      <h2>{{ selected.title }}</h2>
+      <h2>{{ product.title }}</h2>
 
-      <p class="desc">{{ selected.description }}</p>
+      <p class="desc">{{ product.description }}</p>
 
-      <div class="price">Rs. {{ selected.price }}</div>
+      <div class="price">Rs. {{ product.price }}</div>
 
       <div class="rating">⭐⭐⭐⭐⭐ (4.8)</div>
 
       <!-- buttons -->
       <div class="modal-actions">
-        <button class="btn btn-primary" @click="add(selected)">
+        <button class="btn btn-primary" @click="emit('add', product)">
           🛒 Add to Cart
         </button>
 
-        <button class="btn" @click="selected=null">
+        <button class="btn" @click="emit('close')">
           Close
         </button>
       </div>
@@ -38,13 +38,11 @@
 </template>
 
 <script setup lang="ts">
-
-const props = defineProps({
-  product: Object
-})
+const props = defineProps<{
+  product: any
+}>()
 
 const emit = defineEmits(["close", "add"])
-
 </script>
 
 <style scoped>

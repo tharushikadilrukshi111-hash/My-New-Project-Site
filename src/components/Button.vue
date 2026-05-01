@@ -29,4 +29,22 @@ defineEmits(["click"])
   color: white;
 }
 
+.btn:hover {
+  background: white;
+  color: #667eea;
+}
+
+
+
+
+.dark .btn {
+  background: rgba(0,0,0,0.4);
+  color: white;
+}
+
+.dark .btn:hover {
+  background: white;
+  color: black;
+}
+
 </style>
