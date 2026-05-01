@@ -89,6 +89,7 @@ const updateSearch = (e: Event) => {
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-left: auto; 
 }
 
 </style>

@@ -41,7 +41,7 @@ const filtered = computed(() =>
 
     <style scoped>
     .section-title h2 {
-     font-size: 22px;
+     font-size: 25px;
      }
     .section-title {
          padding: 10px 40px;
