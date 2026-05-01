@@ -58,6 +58,7 @@ const emit = defineEmits(["close", "remove"])
   background: rgba(0,0,0,0.6);
   display: flex;
   justify-content: flex-end;
+   z-index: 9999;
 }
 .cart-panel {
   width: 450px;
